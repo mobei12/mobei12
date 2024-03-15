@@ -10,7 +10,7 @@ import { ExtendedRouteObject } from './type';
 const routesConfig: ExtendedRouteObject[] = [
 	{
 		path: '/home',
-		auth: true,
+		// auth: true,
 		element: <Home />,
 		children: [
 			{

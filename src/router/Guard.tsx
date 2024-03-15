@@ -11,7 +11,13 @@ export default class Guard {
 		this.role = JSON.parse(localStorage.getItem('user') || '{}').role;
 	}
 
-	transformRoutes(routes = this.routes): ExtendedRouteObject[] {
+	/**
+	 * 将路由转换为扩展路由对象数组。
+	 *
+	 * @param {ExtendedRouteObject[]} routes - 要转换的路由
+	 * @return {ExtendedRouteObject[]} 转换后的路由
+	 */
+	transformRoutes(routes: ExtendedRouteObject[] = this.routes): ExtendedRouteObject[] {
 		const routesMap: ExtendedRouteObject[] = [];
 		routes.forEach((item) => {
 			const temp: ExtendedRouteObject = { ...item };
