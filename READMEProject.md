@@ -1,6 +1,6 @@
 ### 技术栈 [React](https://react.docschina.org/)(18)+[TypeScript](https://www.typescriptlang.org/zh/)(5.3.3)+[Webpack](https://webpack.docschina.org/)(5.90.3)
 
-一个 基础的antd react ts 模版，添加了reactRouter6,封装了axios请求
+一个  react ts 模版，添加了reactRouter6,封装了axios请求
 
 ### `yarn start`
 

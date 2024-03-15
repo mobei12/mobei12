@@ -1,5 +1,4 @@
 import { FC, ReactElement } from 'react';
-import { Skeleton } from 'antd';
 
-const Loading: FC = (): ReactElement => { return <Skeleton active /> };
+const Loading: FC = (): ReactElement => { return <div>loading</div> };
 export default Loading;

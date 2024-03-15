@@ -1,4 +1,3 @@
-import { Button, Result } from 'antd';
 import { FC } from 'react';
 
 const NoFoundPage: FC = () => {
@@ -6,16 +5,8 @@ const NoFoundPage: FC = () => {
 		window.history.back();
 	};
 	return (
-		<Result
-			status="404"
-			title="404"
-			subTitle="没有找到您访问的页面"
-			extra={
-				<Button type="primary" onClick={goBack}>
-					返回
-				</Button>
-			}
-		/>
+		<div title="没有找到您访问的页面" ><button type="button" onClick={goBack}>返回</button>
+		</div>
 	);
 };
 

@@ -1,5 +1,3 @@
-import { message } from 'antd';
-
 // eslint-disable-next-line no-shadow
 export enum EMessageType {
 	success = 'success',
@@ -32,11 +30,10 @@ export function showMessage(
 	duration: number = 3,
 	callback?: VoidFunction,
 ): void {
-	message[type](msg, duration, () => {
-		if (typeof callback === 'function') {
-			callback();
-		}
-	});
+	console.error(msg, type, duration, callback);
+	if (typeof callback === 'function') {
+		callback();
+	}
 }
 
 /**
