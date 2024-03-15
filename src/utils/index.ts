@@ -19,7 +19,7 @@ export function removeToken(): void {
  * @description 展示提示
  * @param msg  提示信息
  * @param type 类型
- * @param duration 时长
+ * @param duration 时长111
  * @param callback 回调
  */
 export function showMessage(
