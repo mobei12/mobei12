@@ -4,7 +4,7 @@ const webpack = require('webpack');
 const baseConfig = require('./webpack.base.js');
 const TerserPlugin = require('terser-webpack-plugin');
 //使用dll，必须在打包前先生成manifest webpack --config .\build\webpack.dll.conf.js
-const manifest = require('./dist/vendor.manifest.json');
+//const manifest = require('./dist/vendor.manifest.json');
 const { FileListPlugin } = require('../plugin.js');
 const prodConfig = merge(baseConfig, {
 	mode: 'production',
@@ -32,10 +32,10 @@ const prodConfig = merge(baseConfig, {
 	},
 	plugins: [
 		// 生成dll
-		new webpack.DllReferencePlugin({
+		/* new webpack.DllReferencePlugin({
 			context: __dirname,
 			manifest,// manifest 就是之前打包出来的 json 文件
-		}),
+		}), */
 		new FileListPlugin(),
 		/* css压缩 */
 		new CssMinimizerPlugin({
