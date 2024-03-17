@@ -2,10 +2,17 @@ import { FC } from 'react';
 
 const NoFoundPage: FC = () => {
 	const goBack = (): void => {
-		window.history.back();
+		// Todo 修改路由切换
+		window.location.href = '/#/home/OverView';
 	};
 	return (
-		<div title="没有找到您访问的页面" ><button type="button" onClick={goBack}>返回</button>
+		<div className='text-center pt-20 space-y-10'>
+			<h2 className='text-5xl'>404</h2>
+			<div className=' bg-sky-500 w-20  p-1 mx-auto rounded-md cursor-pointer hover:bg-sky-700 text-gray-50' onClick={goBack}>
+				去主页
+			</div>
+			<p className='text-gray-400'>这里什么 都没有</p>
+			<p className='text-gray-400 mt-20'>design by @mobei</p>
 		</div>
 	);
 };

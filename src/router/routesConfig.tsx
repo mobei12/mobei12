@@ -25,7 +25,7 @@ const routesConfig: ExtendedRouteObject[] = [
 			},
 			{
 				path: '',
-				element: <Navigate to="PageTemplate" replace />,
+				element: <Navigate to="OverView" replace />,
 			},
 		],
 	},
