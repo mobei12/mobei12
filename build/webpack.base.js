@@ -28,7 +28,7 @@ module.exports = {
 	},
 	output: {
 		filename: '[name].[chunkhash:8].js', // 打包后的文件名称
-		path: path.resolve(projectRoot, './gitPage'), // 打包后的目录
+		path: path.resolve(projectRoot, './dist'), // 打包后的目录
 		clean: true,
 	},
 	resolve: {
@@ -60,7 +60,7 @@ module.exports = {
 			{
 				test: /\.s[ac]ss|css$/i,
 				...shared,
-				use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+				use: [MiniCssExtractPlugin.loader, 'css-loader','postcss-loader', 'sass-loader'],
 				issuer: /\.[tj]sx?$/,
 			},
 			{

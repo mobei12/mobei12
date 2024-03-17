@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom';
 
 function Layout() {
 	return (
-		<div className='layout-container'>
+		<div className='  h-full bg-gradient-to-br from-purple-500 to-cyan-500'>
 			<Outlet />
 		</div>
 	);

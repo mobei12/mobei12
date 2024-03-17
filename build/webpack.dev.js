@@ -6,7 +6,7 @@ const PORT = 8080; // 你的 devServer 端口号
 const URL = `http://localhost:${PORT}/#/home`; // 要打开的 URL
 const defConfig = merge(config, {
 	mode: 'development',
-	devtool: 'source-map',//开启sourceMap，方便调试
+	//devtool: 'source-map',//开启sourceMap，方便调试
 	devServer: {
 		proxy: [
 			{
@@ -18,18 +18,16 @@ const defConfig = merge(config, {
 		],
 	},
 });
-// 创建 webpack compiler
+/*创建 webpack compiler*/
 const compiler = webpack(defConfig);
 // 创建 devServer
 const devServerOptions = Object.assign({}, defConfig?.devServer, {
-	/*open: true, // 打开浏览器
-	 hot: true,*/
+	// 可以加额外的dev配置
 });
 const server = new WebpackDevServer(devServerOptions, compiler);
 // 启动 devServer
 server.start().then(() => {
 	console.log(`dev server listening on port ${PORT}`);
-
 	// 打开指定路由
 	const { exec } = require('child_process');
 	exec(`start ${URL}`); // 在 Windows 上打开 URL

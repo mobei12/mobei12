@@ -5,7 +5,7 @@ import routesConfig from './router/routesConfig';
 
 const App: FC = () => {
 	return (
-		<div className="App">
+		<div className="App h-full">
 			<Element routesConfig={routesConfig} />
 		</div>
 	)

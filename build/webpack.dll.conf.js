@@ -7,7 +7,7 @@ module.exports = {
 	},
 	output: {
 		filename: '[name].dll.js',
-		path: path.resolve(__dirname, 'dist'),
+		path: path.resolve(__dirname, 'webpackDll'),
 		library: '[name]_dll', // 将输出的 DLL 模块名设为全局变量
 	},
 	plugins: [
