@@ -65,7 +65,7 @@ export class Request {
 
 	/* private showLoading() {
 	 if (this.isLoading === 0) {
-	 // 显示加载中
+	  显示加载中
 	 }
 	 this.isLoading++;
 	 }
