@@ -5,7 +5,8 @@ const baseConfig = require('./webpack.base.js');
 const TerserPlugin = require('terser-webpack-plugin');
 //使用dll，必须在打包前先生成manifest webpack --config .\build\webpack.dll.conf.js
 //const manifest = require('./dist/vendor.manifest.json');
-const { FileListPlugin } = require('../plugin.js');
+const dotenv = require('dotenv');
+const prodEnv = dotenv.config({ path: 'dev.env', override: true });
 const prodConfig = merge(baseConfig, {
 	mode: 'production',
 	/* cdn分离依赖包 */
@@ -36,8 +37,8 @@ const prodConfig = merge(baseConfig, {
 			context: __dirname,
 			manifest,// manifest 就是之前打包出来的 json 文件
 		}), */
-		new FileListPlugin(),
 		/* css压缩 */
+		new webpack.DefinePlugin(prodEnv?.parsed),
 		new CssMinimizerPlugin({
 			test: /\.css$/,
 		}),
