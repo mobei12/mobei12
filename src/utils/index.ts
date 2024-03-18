@@ -1,39 +1,10 @@
 // eslint-disable-next-line no-shadow
-export enum EMessageType {
-	success = 'success',
-	error = 'error',
-	warning = 'warning',
-	info = 'info',
-}
-
-type TMessageType = keyof typeof EMessageType;
 
 /**
  * @description 清除所有token
  */
 export function removeToken(): void {
 	localStorage.clear();
-}
-
-/**
- * @description 展示提示
- * @param msg  提示信息
- * @param type 类型
- * @param duration 时长111
- * @param callback 回调
- */
-export function showMessage(
-	msg: string,
-	// eslint-disable-next-line default-param-last
-	type: TMessageType = EMessageType.success,
-	// eslint-disable-next-line default-param-last
-	duration: number = 3,
-	callback?: VoidFunction,
-): void {
-	console.error(msg, type, duration, callback);
-	if (typeof callback === 'function') {
-		callback();
-	}
 }
 
 /**

@@ -4,7 +4,7 @@ const config = require('./webpack.base');
 const { merge } = require('webpack-merge');
 const dotenv = require('dotenv');
 const devEnv = dotenv.config({ path: 'dev.env', override: true });
-const port = process.env.port || 8081; // 你的 devServer 端口号
+const port = process.env.CUSTOMIZE_PORT || 8081; // 你的 devServer 端口号
 const defConfig = merge(config, {
 	mode: 'development',
 	//devtool: 'source-map',//开启sourceMap，方便调试
