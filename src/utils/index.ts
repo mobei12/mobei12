@@ -1,5 +1,3 @@
-// eslint-disable-next-line no-shadow
-
 /**
  * @description 清除所有token
  */

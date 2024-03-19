@@ -59,5 +59,6 @@ module.exports = {
 		'comma-dangle': 'off', // 逗号结尾
 		'linebreak-style': 'off',
 		'object-curly-spacing': 'off',
+		'no-shadow': 'off',
 	},
 };

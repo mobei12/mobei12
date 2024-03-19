@@ -4,6 +4,7 @@ export enum EMessageType {
 	warning = 'warning',
 	info = 'info',
 }
+let container: HTMLDivElement | null;
 /**
  * @description 展示提示
  * @param msg  提示信息
@@ -33,28 +34,36 @@ const getColor = (type: EMessageType): string => {
 			return 'text-green-500 bg-green-100';
 	}
 };
-const directiveRender: MessageComponent = ({ msg, type = EMessageType.success, duration, callback }) => {
-	// 创建消息容器
-	const container = document.createElement('div');
-	container.setAttribute('class', 'fixed bottom-0 left-0 right-0 flex justify-center mb-4');
-	document.body.appendChild(container);
-
-	// 创建消息元素
-	const messageElement = document.createElement('div');
+const addMessageElement = (
+	{ msg, type = EMessageType.success, duration, callback }: IMessage,
+	container: HTMLDivElement,
+) => {
+	const divElement = document.createElement('div');
+	divElement.setAttribute('class', 'mt-5');
+	const messageElement = document.createElement('span');
 	messageElement.textContent = msg;
-
-	// 添加消息元素的样式
-	messageElement.setAttribute('class', `font-semibold px-4 py-2 rounded-md text-center ${getColor(type)}`);
-
-	// 添加消息元素到容器中
-	container.appendChild(messageElement);
-
-	// 设置定时器关闭消息
+	messageElement.setAttribute('class', `font-semibold px-4 py-2 rounded-md  text-center ${getColor(type)}`);
+	divElement.appendChild(messageElement);
 	setTimeout(() => {
-		container.remove();
+		divElement.remove();
+		if (container.children.length === 0) {
+			container?.remove();
+			container = null;
+		}
 		if (typeof callback === 'function') {
 			callback();
 		}
 	}, duration * 1000);
+	container.appendChild(divElement);
+};
+
+const directiveRender: MessageComponent = ({ msg, type = EMessageType.success, duration, callback }) => {
+	// 创建消息容器
+	if (!container || container === null) {
+		container = document.createElement('div');
+		container.setAttribute('class', 'message-container fixed top-0 text-center left-0 right-0');
+	}
+	document.body.appendChild(container);
+	addMessageElement({ msg, type, duration, callback }, container);
 };
 export default directiveRender;
