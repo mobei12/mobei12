@@ -10,6 +10,7 @@ export default defineConfig({
     light: '/homepage_light_icon.png',
     dark: '/homepage_dark_icon.png',
   },
+  base: '/mobei12/',
   themeConfig: {
     socialLinks: [
      /*  { icon: 'github', mode: 'link', content: 'https://github.com/web-infra-dev/rspress' }, */

@@ -3,8 +3,12 @@ pageType: home
 
 hero:
   name: MOBEI&ARTICLE
-  text: MOBEI&ARTICLE
-  tagline: defection by MOBEI&RSPRESS
+  caption: 基于Rspress的一个文档站点，
+  tagline: Develop by MOBEI with RSPRESS
+  actions:
+    - theme: brand
+      text: 查看文章
+      link: /docs/
   image:
     src: /mobei_icon.png
     alt: mobei&article Logo
