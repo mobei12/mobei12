@@ -1,5 +1,5 @@
-# github action 持续集成部署github pages
-#### github 上的操作
+# github action 持续集成部署
+### github 上的操作
 
 1.在 github 打开你要操作的项目地址,点击右上角的`Settings`,在左侧选择`Secrets->Actions`
 
@@ -8,10 +8,8 @@
 3.输入 `name:"ACCESS_TOKEN",value:上面复制的私钥`,点击`Add secret`
 
 4.接着 重复上两步,建立`HOST:你服务器的ip`、你的目标`TARGET:你服务器上放资源的地方`以及其他的你需要隐藏起来的信息,例如`USER:root`,`PASSWORD:123456`,看个人需求
-
----
-
 准备工作基本完成,
+---
 
 ### 便携自动化部署文档
 
@@ -57,27 +55,28 @@ jobs:
                   # 上面几个参数可以在github secrets中设置,然后用secrets.的模式引用
 ```
 ## 发布github pages
+### 发布本地项目到github pages
 ```yml
 name: NodeJS with Webpack
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main" ] #在每次push时执行任务
   pull_request:
     branches: [ "main" ]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest #指定构建的虚拟机版本
 
     strategy:
       matrix:
-        node-version: [18]
+        node-version: [18] #指定构建的虚拟机版本
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v4 #检出
 
-    - name: Cache dependencies
+    - name: Cache dependencies #设置依赖缓存.
       uses: actions/cache@v2
       with:
         path: ~/.npm
@@ -90,12 +89,12 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: Install dependencies && Build
+    - name: Install dependencies && Build    #安装依赖并打包
       run: |
         npm install --force
         npm run build
 
-    - name: Deploy to GitHub Pages
+    - name: Deploy to GitHub Pages #部署
       uses: JamesIves/github-pages-deploy-action@3.7.1
       with:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}

@@ -13,7 +13,14 @@ export default defineConfig({
   base: '/mobei12/',
   themeConfig: {
     socialLinks: [
-     /*  { icon: 'github', mode: 'link', content: 'https://github.com/web-infra-dev/rspress' }, */
+      { icon: 'github', mode: 'link', content: 'https://github.com/mobei12' },
     ],
+    lastUpdatedText: '最后更新时间',
+    lastUpdated: true,
+    searchPlaceholderText: '搜索文章',
+  },
+  markdown: {
+    defaultWrapCode: true,
+    showLineNumbers: true,
   },
 });

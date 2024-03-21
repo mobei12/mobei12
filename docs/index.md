@@ -15,16 +15,11 @@ hero:
     alt: mobei&article Logo
 features:
   - title: 简介
-    details: 来自古城西安，2015年大学本科毕业，来深圳从事软件开发工作至今；
-    icon: 👨
-  - title: 专业技能
-    details: 1. 熟悉React、vueJS等主流MVVM框架
-             2. 熟练使用 HTML、CSS、JavaScript等前端技术，
-             3. 熟练Git和 SVN进行代码管理，实现敏捷开发
-             4. 完成网页静态布局，开发兼容主流浏览器的页面，以及实现页面的交互，提升用户体验
-             5. 熟练使用ElementUI、AntDesign等UI框架
-             6. 熟练使用ECharts、DataV进行可视化开发，有arcgis地图开发经验
-             7. 对 Node、express中间件有使用了解，后端开发经验
+    details: 来自古城西安，2015年大学本科毕业，软件工程专业，在深圳从事软件开发工作至今；
+    icon: 🛠
+  - title: 技术栈及工具链
+    details:
+           React、vue、HTML、CSS、JavaScript、ES6、TypeScript;Git、SVN;webpack、npm、yarn;Node.js、Express;ECharts、DataV
     icon: 👨‍💻
   - title: 自我评价
     details:

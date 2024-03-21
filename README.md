@@ -5,6 +5,7 @@
 - 😆 Fun fact: Cycling and watching movies
 - 💬 Ask me about anything!
 - 📮 mobeigege@icloud.com
+- 🌐 https://mobei12.github.io/mobei12/
 #### 🛠 &nbsp;Tech Stack
 - 🌐 &nbsp;![HTML5](https://img.shields.io/badge/-HTML5-333333?style=flat&logo=HTML5) ![CSS](https://img.shields.io/badge/-CSS-333333?style=flat&logo=CSS3&logoColor=1572B6) ![JavaScript](https://img.shields.io/badge/-JavaScript-333333?style=flat&logo=javascript) ![React](https://img.shields.io/badge/-React-333333?style=flat&logo=react) ![VUE](https://img.shields.io/badge/-vue-%2342b883?logo=Vue) ![Static Badge](https://img.shields.io/badge/-node-%2333333?logo=node)
 

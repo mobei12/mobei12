@@ -1,0 +1,124 @@
+# 在前端项目中使用webpack的环境变量
+最近在折腾项目中，有时候会需要在前端项目中使用环境变量，比如在`webpack.prod.js`或者`webpack.dev.js`中使用。找了一些解决办法，最后有了这篇文章。
+## 定义环境变量
+### 在根目录下创建.env文件
+`base.env`
+```env
+#基础配置，不管开发或者测试环境都用得到,使用CUSTOMIZE前缀，和node的环境变量区分
+CUSTOMIZE_APP_TITLE=一个系统
+```
+`dev.env`
+```env
+#测试开发环境信息
+CUSTOMIZE_PORT=8081
+CUSTOMIZE_SERVER_URL='http://localhost:8000'
+CUSTOMIZE_MODE='development'
+```
+`prod.env`
+```env
+#正式环境信息
+CUSTOMIZE_MODE='production'
+CUSTOMIZE_PORT=80
+CUSTOMIZE_SERVER_URL='~api'
+```
+### 使用环境变量
+#### 在webpack中使用
+使用`dotenv`插件直接帮我们加入变量到`process.env`,同时可以引入多个，并且可以覆盖，详细文档[dotenv](https://github.com/motdotla/dotenv)
+```js
+    // webpack.prod.js or webpack.dev.js
+    // 省略些代码
+    const dotenv = require('dotenv');// 引入插件
+    dotenv.config({ path: ['dev.env', 'base.env'], override: true });// 加载.env文件,并且覆盖,
+    console.log(process.env.CUSTOMIZE_APP_TITLE);// 一个系统
+    // 省略些代码
+```
+#### 在前端页面中使用
+相对直接在webpack中使用，我们要保证页面编译通过;就需要使用到`webpack.DefinePlugin`,一个插件把变量注入到全局;
+##### `dotenv.config()`会返回一个处理好的对象
+```js
+// 省略些代码
+ const _dotenv = dotenv.config({ path: ['dev.env', 'base.env'], override: true })
+ console.log(_dotenv)
+ // 省略些代码
+ /*{
+    parse:{ CUSTOMIZE_APP_TITLE: '一个系统', CUSTOMIZE_MODE: 'development', CUSTOMIZE_PORT: '8081', CUSTOMIZE_SERVER_URL: 'http://localhost:8000' }
+ }*/
+```
+##### `webpack.DefinePlugin`[使用方式](https://webpack.js.org/plugins/define-plugin/)
+`webpack.dev.js` 里配置
+```js
+// 省略些代码
+module.exports = {
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.CUSTOMIZE_MODE': JSON.stringify('CUSTOMIZE_MODE')
+    })
+  ]
+}
+// 省略些代码
+```
+在页面中使用
+```js
+baseURL: process.env.CUSTOMIZE_MODE === 'production' ? process.env.CUSTOMIZE_SERVER_URL : '/api',
+```
+##### 总结一下页面使用
+配置
+```js
+ // webpack.prod.js or webpack.dev.js
+    // 省略
+    const dotenv = require('dotenv');// 引入插件
+    const _dotenv = dotenv.config({ path: ['dev.env', 'base.env'], override: true });// 加载.env文件,并且覆盖,
+    console.log(process.env.CUSTOMIZE_APP_TITLE);// 一个系统
+    module.exports = {
+        plugins: [
+            new webpack.DefinePlugin(generateEnv(_dotenv.parse))
+        ]
+    }
+    /**
+     * 根据提供的解析数据生成环境对象。
+     *
+     * @param {Object} parsed - 解析数据对象。
+     * @return {Object} 生成的环境对象。
+     */
+    function generateEnv(parsed) {
+        const env = {};
+        Object.keys(parsed).forEach(key => {
+            const value = parsed[key];
+            if (value && value !== null) {
+                env[`process.env.${key}`] = JSON.stringify(value);
+            }
+        });
+        return env;
+    }
+    // 省略些代码
+```
+使用
+```tsx
+import { FC } from 'react';
+import { Outlet } from 'react-router-dom';
+import './index.scss';
+
+const User: FC = () => {
+	return (
+		<div className="user-main">
+			<div className="user-container">
+				<div className="title">{process.env.CUSTOMIZE_APP_TITLE}</div>
+				<Outlet />
+			</div>
+		</div>
+	);
+};
+export default User;
+```
+***注意：如果使用了ts，可能会出现报错 `process is not defined`***
+定义一下全局ts类型
+```ts
+declare const process: {
+	env: {
+		[key: string]: string;
+	};
+	[key: string]: unknown;
+};
+```
+---
+谢谢观看🙂️
