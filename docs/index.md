@@ -1,11 +1,8 @@
 ---
 pageType: home
-
 hero:
   name: MOBEI&ARTICLE
-  text: 记录、分享、
-  caption: 基于Rspress的一个文档站点，
-  tagline: Develop by MOBEI with RSPRESS
+  text: 记录、分享、 
   actions:
     - theme: brand
       text: 查看文章
@@ -14,7 +11,7 @@ hero:
     src: /mobei_icon.png
     alt: mobei&article Logo
 features:
-  - title: 简介
+  - title: 个人简介
     details: 来自古城西安，2015年大学本科毕业，软件工程专业，在深圳从事软件开发工作至今；
     icon: 👨‍💻
   - title: 技术栈及工具链
