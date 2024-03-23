@@ -21,7 +21,7 @@ CUSTOMIZE_MODE='production'
 CUSTOMIZE_PORT=80
 CUSTOMIZE_SERVER_URL='~api'
 ```
-### 使用环境变量
+###  使用环境变量
 #### 在webpack中使用
 使用`dotenv`插件直接帮我们加入变量到`process.env`,同时可以引入多个，并且可以覆盖，详细文档[dotenv](https://github.com/motdotla/dotenv)
 ```js

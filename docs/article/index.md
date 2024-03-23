@@ -9,11 +9,12 @@
 
 4.接着 重复上两步,建立`HOST:你服务器的ip`、你的目标`TARGET:你服务器上放资源的地方`以及其他的你需要隐藏起来的信息,例如`USER:root`,`PASSWORD:123456`,看个人需求
 准备工作基本完成,
+
 ---
 
 ### 便携自动化部署文档
 
-1.在本地项目根目录创建`.github`文件夹,并在其中创建`workflows`文件夹,并在其中创建`main.yml`文件,内容如下
+在本地项目根目录创建`.github`文件夹,并在其中创建`workflows`文件夹,并在其中创建`main.yml`文件,内容如下
 
 ```yaml
     name: NodeJS with vuepro #随便起的名字

@@ -2,7 +2,7 @@
 pageType: home
 hero:
   name: MOBEI&ARTICLE
-  text: 记录、分享、 
+  text: 记录、分享、
   actions:
     - theme: brand
       text: 查看文章
@@ -20,7 +20,7 @@ features:
     icon: 🛠
   - title: 自我评价
     details:
-            1. 具有团队合作精神，有责任心抗压能力强
+            1. 具有团队合作精神，有责任心抗压能力强 \n
             2. 尽职工作，乐于接受有挑战的工作
             3. 日常工作习惯进行自我总结和复盘，对学习新技术有好奇心
     icon: 🚗
