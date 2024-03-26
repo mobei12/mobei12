@@ -1,0 +1,126 @@
+# reactRouterV6 history模式的使用
+这是对前一个文章（）的补充，演示了如何使用react-router-v6的history模式，并且加上路由守卫
+### 安装
+
+```shell
+npm install --save react-router-dom@6
+```
+```shell
+yarn add --save react-router-dom@6
+```
+```shell
+pnpm add --save react-router-dom@6
+```
+### 使用
+#### 根页面包裹所有
+```tsx
+// index.tsx
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
+import './index.scss';
+// 根路由需要被包裹
+const root = createRoot(document.getElementById('root') as HTMLElement);
+root.render(
+	<BrowserRouter>
+		<App />
+	</BrowserRouter>,
+);
+```
+#### App页面调用路由配置
+```tsx
+// App.tsx
+import { useRoutes } from 'react-router-dom';
+import './App.scss';
+//直接使用配置文件的路由
+import routesWithGuard from 'src/router/routesConfig';
+
+const App = () => {
+	const routes = routesWithGuard();
+	return <div className="App bg-gray-700 h-full">{useRoutes(routes)}</div>;
+};
+export default App;
+
+```
+#### 配置文件
+```tsx
+//routesConfig.tsx
+import { Navigate } from 'react-router-dom';
+import NotFind from 'src/pages/404';
+import Home from 'src/pages/Layout';
+import PageTemplate from 'src/pages/Layout/PageTemplate';
+import { ExtendedRouteObject } from './type';
+/* ---HomeEnd---*/
+export default function routesWithGuard(): ExtendedRouteObject[] {
+    //这里可以改成自己的校验逻辑
+    const isLogin = !!localStorage.getItem('user_token');
+    return [
+        {
+        path: '/home',
+        element: isLogin ? <Home /> : <Navigate to="/user/login" />,
+        children: [
+                {
+                    path: 'PageTemplate',
+                    title: '页面模板',
+                    element: <PageTemplate />,
+                },
+                {
+                    path: '',
+                    element: <Navigate to="PageTemplate" replace />,
+                },
+            ],
+        },
+        {
+            path: '*',
+            element: <NotFind />,
+        },
+    ];
+}
+
+```
+### 路由导航
+#### 组件式
+
+```tsx
+
+import * as React from "react";
+import { Link } from "react-router-dom";
+
+function UsersIndexPage({ users }) {
+  return (
+    <div>
+      <h1>Users</h1>
+      <ul>
+        {users.map((user) => (
+          <li key={user.id}>
+            <Link to='user'>{user.name}</Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+#### 函数式组件中使用
+
+```tsx
+
+import { NavigateFunction, Outlet, useNavigate } from 'react-router-dom';
+function Layout() {
+	const navigate: NavigateFunction = useNavigate();
+	const loginOut = () => {
+		localStorage.clear();
+		navigate('/user/login');// 重定向到对应的路由
+	};
+	return (
+		<div className="layout-container h-full">
+			<button type="button" onClick={() => loginOut()}>
+				退出
+			</button>
+			<Outlet />
+		</div>
+	);
+}
+export default Layout;
+
+```

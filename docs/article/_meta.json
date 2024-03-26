@@ -1,1 +1,21 @@
-["index","express-jwt","webpack-env","mdx"]
+[
+    {
+        "type": "file",
+        "name": "index"
+    },
+    {
+        "type": "file",
+        "name": "express-jwt",
+        "label": "express登录与鉴权"
+    },
+    {
+        "type": "file",
+        "name": "webpack-env",
+        "label": "webpack全局变量的使用"
+    },
+    {
+        "type": "file",
+        "name": "reactRouterV6",
+        "label": "reactRouterV6的使用"
+    }
+]
