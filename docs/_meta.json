@@ -3,5 +3,9 @@
     "text": "文章",
     "link": "/article/",
     "activeMatch": "/article/"
+  },{
+    "text": "关于我",
+    "link": "/cv/",
+    "activeMatch": "/cv/"
   }
 ]

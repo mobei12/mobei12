@@ -17,5 +17,14 @@
         "type": "file",
         "name": "reactRouterV6",
         "label": "reactRouterV6的使用"
+    },
+    {
+        "type": "file",
+        "name": "mdx"
+    },
+    {
+        "type": "file",
+        "name": "functionsAsChildren",
+        "label": "react functions As Children"
     }
 ]
