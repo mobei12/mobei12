@@ -14,7 +14,7 @@ features:
   - title: 个人简介
     details: 来自古城西安，2015年大学本科毕业，软件工程专业，在深圳从事软件开发工作至今；
     icon: 👨‍💻
-    link: /cv/
+    link: /mobei12/cv/
   - title: 技术栈及工具链
     details:
            React、vue、HTML、CSS、JavaScript、ES6、TypeScript;Git、SVN;webpack、npm、yarn;Node.js、Express;ECharts、DataV
