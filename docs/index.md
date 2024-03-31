@@ -4,9 +4,12 @@ hero:
   name: MOBEI&ARTICLE
   text: 记录、分享、
   actions:
-    - theme: brand
+    - theme: alt
       text: 查看文章
       link: /article/
+    - theme:  brand
+      text: 关于我
+      link: /cv/
   image:
     src: /mobei_icon.png
     alt: mobei&article Logo

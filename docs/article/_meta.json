@@ -16,11 +16,12 @@
     {
         "type": "file",
         "name": "reactRouterV6",
-        "label": "reactRouterV6的使用"
+        "label": "ReactRouterV6的使用"
     },
     {
         "type": "file",
-        "name": "mdx"
+        "name": "web-guide",
+        "label": "web前端规范"
     },
     {
         "type": "file",
