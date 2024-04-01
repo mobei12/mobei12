@@ -1,0 +1,258 @@
+import Tag from '../../src/components/Tag'
+
+# Linux Centos 7安装MongoDB、Node
+<Tag tag='Centos'  /> <Tag tag='Linux'  />  <Tag tag='Yum'  /> <Tag tag='Node'  /> <Tag tag='MongoDB'  />
+本安装教程系统版本为Linux Centos 7，使用Yum源安装MongoDB
+
+## Yum
+
+---
+
+### 概括几个常用的使用方式
+
+#### 1. 安装指定的安装包package
+```bash
+yum install package
+```
+#### 2. 更新和升级
+    - 全部更新 `yum update`
+    - 更新指定程序包package `yum update package`
+    - 检查可更新的程序 `yum check-update`
+    - 升级指定程序包package `yum upgrade package`
+
+#### 3. 查找和显示
+    - 列出所有可以安装或更新的包的信息 `yum info`
+    - 显示安装包信息package `yum info package`
+    - 显示所有已经安装和可以安装的程序包 `yum list`
+    - 显示指定程序包安装情况package `yum list package`
+    - 搜索匹配特定字符的package的详细信息 `yum search package`
+#### 4. 删除程序
+    - 删除程序包package `yum remove | erase package `
+    - 查看程序package依赖情况 `yum deplist package`
+#### 5. 清除缓存
+     - 清除缓存目录下的软件包 `yum clean packages`
+     - 清除缓存目录下的 headers `yum clean headers`
+     - 清除缓存目录下旧的 headers `yum clean oldheaders`
+     - 清除缓存目录下的软件包及旧的headers `yum clean, yum clean all  // (= yum clean packages; yum clean oldheaders)`
+---
+## 安装Mongodb
+
+### 配置系统yum源
+
+### 1. 创建.repo文件，生成mongodb的源
+
+```bash
+vim /etc/yum.repos.d/mongodb-org-4.0.repo
+```
+
+### 2. 添加以下配置信息：
+
+```vim
+[mongodb-org-4.0]
+name=MongoDB Repository # 名称
+baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.0/x86_64/ # 获得下载的路径
+gpgcheck=1 # 表示对从这个源下载的rpm包进行校验；
+enabled=1 # 表示启用这个源。
+gpgkey=https://www.mongodb.org/static/pgp/server-4.0.asc # gpg验证
+```
+### 3. 保存退出
+
+```visual-basic
+:wq # 退出保存
+```
+
+### 使用yum安装MongoDB
+
+### 1. 安装MongoDB
+
+```bash
+sudo yum install -y mongodb-org
+```
+
+### 2. 验证安装结果
+
+```bash
+rpm -qa |grep mongodb
+
+rpm -ql mongodb-org-server
+```
+
+### 3. 启动MongoDB
+
+启动MongoDB服务
+
+```bash
+systemctl start mongod.service
+```
+
+MongoDB默认端口是27017，查看是否开启
+
+```bash
+netstat -natp | grep 27017
+```
+
+检查数据库是否安装成功
+
+```bash
+ps -aux | grep mongod    # 查看数据库的进程是否存在
+```
+
+### 4. 验证服务开启
+
+```bash
+mongo
+```
+
+### 常用命令清单
+
+```bash
+// 1、开启MongoDB
+sudo service mongod start  或者 systemctl start mongod.service  # 开启MongoDB
+sudo chkconfig mongod on  # 加入开机启动
+sudo service mongod restart # 重启MongoDB
+
+// 2、关闭MongoDB
+sudo service mongod stop  # 关闭防火墙
+
+// 3、卸载MongoDB
+sudo yum erase $(rpm -qa | grep mongodb-org)    # 卸载MongoDB
+sudo rm -r /var/log/mongodb  # 删除日志文件
+sudo rm -r /var/lib/mongo    # 删除数据文件
+```
+
+### 远程连接Mongodb
+
+### 1. 修改配置文件mongodb.conf
+
+```vim
+vi /etc/mongod.conf
+
+# network interfaces
+net:
+  port: 27017
+  bindIp: 0.0.0.0  # Enter 0.0.0.0,:: to bind to all IPv4 and IPv6 addresses or, alternatively, use the net.bindIpAll setting.
+```
+
+**修改绑定ip默认127.0.0.1只允许本地连接， 所以修改为bindIp:0.0.0.0, 退出保存**
+
+### 2. 重启mongodb服务
+
+```bash
+sudo service mongod restart
+```
+
+**方法二**
+
+```bash
+iptables -A INPUT -p tcp -m state --state NEW -m tcp --dport 27017 -j ACCEPT
+```
+
+### 4. 建立远程连接
+
+**默认连接**
+
+```bash
+mongo 10.128.218.14:27017
+```
+
+**连接到自定义的用户**
+
+1. 创建用户，设置账号，密码，权限
+
+```bash
+// admin数据库
+> use admin
+switched to db admin
+> db.createUser({ user:"root", pwd:"123456", roles:["root"] })
+Successfully added user: { "user" : "root", "roles" : [ "root" ] }
+
+// 其他数据库
+> use test
+switched to db test
+> db.createUser({ user:"admin", pwd:"123456", roles:["readWrite", "dbAdmin"] })
+Successfully added user: { "user" : "root", "roles" : [ "root" ] }
+```
+
+2.修改mongodb.conf文件，启用身份验证
+
+```bash
+vi /etc/mongod.confsecurity:  authorization: "enabled"   # disable or enabled
+```
+
+3.重启MongoDB
+
+```bash
+sudo service mongod restart
+```
+
+4.用户认证
+
+```bash
+> use admin
+switched to db admin
+> db.auth("root", "123456")
+1 // 授权成功
+
+// 其他常用命令
+db.updateUser(user, writeConcern) # 更新用户
+db.dropUser('test') # 删除用户
+```
+
+5. 远程连接
+
+```bash
+// 终端连接
+mongo 10.128.218.14:27017/database -u username -p password
+
+// mongoose方式连接
+mongoose.connect('mongodb://username:password@host:port/database?options...', {useNewUrlParser: true});
+
+// 通过客户端连接
+```
+---
+
+## 安装node
+
+### 1. 删除旧的 nodejs 版本：
+
+```bash
+$ yum remove nodejs
+```
+
+### 2. 添加Node.js Yum存储库
+
+首先，您需要在Node.js官方网站提供的系统中启用node.js yum存储库。您还需要开发工具来构建要在系统上安装的本机加载项。
+
+最新发布： -
+
+```bash
+$ yum clean all && yum makecache fast
+$ yum install -y gcc-c++ make
+$ curl -sL https://rpm.nodesource.com/setup_12.x | sudo -E bash -
+```
+
+稳定发布： -
+
+```bash
+$ yum clean all && yum makecache fast
+$ yum install -y gcc-c++ make
+$ curl -sL https://rpm.nodesource.com/setup_10.x | sudo -E bash -
+```
+
+### 3. 在CentOS上安装Node.js.
+
+在系统中添加yum存储库后，让我们安装Node.js包。NPM也将与node.js一起安装。此命令还将在您的系统上安装许多其他依赖包。
+
+```bash
+$ sudo yum install nodejs
+```
+
+### 4. 检查Node.js和NPM版本
+
+安装node.js后验证并检查已安装的版本。您可以在node.js 官方网站 上找到有关当前版本的更多详细信息。
+
+```bash
+$ node -v// v12.3.1
+```
+
+另外，检查npm的版本。

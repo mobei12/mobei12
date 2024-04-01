@@ -25,6 +25,11 @@
     },
     {
         "type": "file",
+        "name": "centos-MongoDB",
+        "label": "Centos安装MongoDB"
+    },
+    {
+        "type": "file",
         "name": "functionsAsChildren",
         "label": "react functions As Children"
     }

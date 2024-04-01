@@ -18,6 +18,9 @@ const tagS = {
     'mongodb': 'MongoDB',
     'subversion': 'subversion',
     'env': '.env',
+    'centos': 'Centos',
+    'linux': 'Linux',
+    'eslint': 'eslint',
     'reactrouter': 'reactrouter'
 };
 
