@@ -32,5 +32,9 @@
         "type": "file",
         "name": "functionsAsChildren",
         "label": "react functions As Children"
+    },
+    {
+        "type": "file",
+        "name": "pnpmDep"
     }
 ]

@@ -14,10 +14,13 @@ export default defineConfig({
   themeConfig: {
     socialLinks: [
       { icon: 'github', mode: 'link', content: 'https://github.com/mobei12' },
+      { icon: 'juejin', mode: 'link', content: 'https://juejin.cn/user/571401775883960' },
     ],
     lastUpdatedText: '最后更新时间',
     lastUpdated: true,
     searchPlaceholderText: '搜索文章',
+    enableContentAnimation: true,
+    enableScrollToTop: true,
   },
   markdown: {
     defaultWrapCode: true,
