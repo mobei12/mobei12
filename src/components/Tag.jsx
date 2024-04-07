@@ -21,6 +21,8 @@ const tagS = {
     'centos': 'Centos',
     'linux': 'Linux',
     'eslint': 'eslint',
+    'wechat': 'wechat',
+    'email': 'maildotcom',
     'reactrouter': 'reactrouter'
 };
 
