@@ -8,7 +8,7 @@ const Header = () => {
                     <Tag tag='Email' />：mobeigege@icloud.com
                 </div>
                 <div>
-                    <Tag tag='WeChat' />：mobeigege
+                    <Tag tag='WeChat' />DEBUG__LIFE
                 </div>
             </div>
             <img src={img} alt="mobei" width="250" height="100%"/>
