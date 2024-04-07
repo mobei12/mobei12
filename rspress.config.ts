@@ -3,8 +3,8 @@ import { defineConfig } from 'rspress/config';
 
 export default defineConfig({
   root: path.join(__dirname, 'docs'),
-  title: 'mobei&article',
-  description: 'mobei&article',
+  title: '漠北',
+  description: '记录分享和分享我的文章，',
   icon: '/mobei_icon.png',
   logo: {
     light: '/homepage_light_icon.png',

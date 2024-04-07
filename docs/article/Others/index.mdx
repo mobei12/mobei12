@@ -1,0 +1,117 @@
+import Tag from '../../../src/components/Tag'
+
+# github action 持续集成部署
+<Tag tag='Git' />
+### github 上的操作
+
+1.在 github 打开你要操作的项目地址,点击右上角的`Settings`,在左侧选择`Secrets->Actions`
+
+2.在右侧选择`New repository secret`
+
+3.输入 `name:"ACCESS_TOKEN",value:上面复制的私钥`,点击`Add secret`
+
+4.接着 重复上两步,建立`HOST:你服务器的ip`、你的目标`TARGET:你服务器上放资源的地方`以及其他的你需要隐藏起来的信息,例如`USER:root`,`PASSWORD:123456`,看个人需求
+准备工作基本完成,
+
+---
+
+### 便携自动化部署文档
+
+在本地项目根目录创建`.github`文件夹,并在其中创建`workflows`文件夹,并在其中创建`main.yml`文件,内容如下
+
+```yaml
+    name: NodeJS with vuepro #随便起的名字
+
+on:
+    push: #在每次push时执行任务
+        branches: [main] #只有在main分支上才会执行
+
+jobs:
+    build:
+        runs-on: ubuntu-latest #指定构建的虚拟机版本
+        steps:
+            - name: Checkout #检出
+              uses: actions/checkout@main #检出的依赖2
+              with:
+                  persist-credentials: false #不保存证书
+            - name: Cache Node Dependencies #设置依赖缓存.
+              id: cache
+              uses: actions/cache@v1
+              with:
+                  path: node_modules
+                  key: ${{runner.os}}-npm-caches-${{ hashFiles('package-lock.json')}}
+            - name: Install Dependencies #安装依赖
+              if: steps.cache.outputs.cache-hit != 'true'
+              run: |
+                  npm install --force
+            - name: build project
+              run: |
+                  npm  run build
+            - name: deploy file to server
+              uses: easingthemes/ssh-deploy@v2.0.7 #dd
+              env:
+                  REMOTE_USER: 'root' #ssh user name
+                  REMOTE_HOST: ${{secrets.HOST}} #目标地址,在github secrets中设置
+                  ARGS: '-avz --delete' #参数
+                  SSH_PRIVATE_KEY: ${{secrets.ACCESS_TOKEN}} #github access token
+                  SOURCE: 'dist/' #源文件目录
+                  TARGET: '/data/webStatic/dist' #目标文件目录
+                  # 上面几个参数可以在github secrets中设置,然后用secrets.的模式引用
+```
+## 发布github pages
+### 发布本地项目到github pages
+```yml
+name: NodeJS with Webpack
+
+on:
+  push:
+    branches: [ "main" ] #在每次push时执行任务
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest #指定构建的虚拟机版本
+
+    strategy:
+      matrix:
+        node-version: [18] #指定构建的虚拟机版本
+
+    steps:
+    - uses: actions/checkout@v4 #检出
+
+    - name: Cache dependencies #设置依赖缓存.
+      uses: actions/cache@v2
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install dependencies && Build    #安装依赖并打包
+      run: |
+        npm install --force
+        npm run build
+
+    - name: Deploy to GitHub Pages #部署
+      uses: JamesIves/github-pages-deploy-action@3.7.1
+      with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: dist
+
+```
+### 发布测试
+
+1.把 main.yml 文件上传到 github,然后打开项目的 actions 页面,查看运行状态,如果没触发,看是不是分支不对
+
+2.如果报错的话,看一下是否有缺少依赖,还是 token 啥的配置错了,
+
+3.然后就可以看你的网页了
+
+---../../../src/components/Tag

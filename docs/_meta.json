@@ -7,9 +7,5 @@
     "text": "关于我",
     "link": "/cv/",
     "activeMatch": "/cv/"
-  },{
-    "text": "分享",
-    "link": "/share/",
-    "activeMatch": "/share/"
   }
 ]

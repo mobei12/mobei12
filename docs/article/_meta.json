@@ -1,38 +1,27 @@
 [
     {
         "type": "file",
-        "name": "index"
+        "name": "index",
+        "label": "文章概览"
     },
     {
-        "type": "file",
-        "name": "express-jwt",
-        "label": "express登录与鉴权"
+        "label": "React",
+        "type": "dir",
+        "name": "React"
     },
     {
-        "type": "file",
-        "name": "webpack-env",
-        "label": "webpack全局变量的使用"
+        "label": "构建工具",
+        "type": "dir",
+        "name": "BuildTools"
     },
     {
-        "type": "file",
-        "name": "reactRouterV6",
-        "label": "ReactRouterV6的使用"
+        "label": "后台相关",
+        "type": "dir",
+        "name": "AboutService"
     },
     {
-        "type": "file",
-        "name": "web-guide",
-        "label": "web前端规范"
-    },
-    {
-        "type": "file",
-        "name": "centos-MongoDB"
-    },
-    {
-        "type": "file",
-        "name": "functionsAsChildren"
-    },
-    {
-        "type": "file",
-        "name": "pnpmDep"
+        "label": "其它",
+        "type": "dir",
+        "name": "Others"
     }
 ]

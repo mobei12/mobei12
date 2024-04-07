@@ -1,4 +1,5 @@
-import Tag from '../../src/components/Tag'
+
+import Tag from '../../../src/components/Tag'
 
 # 什么是React函数作为子组件(React functions As Children)
 <Tag tag='React'  />            
@@ -6,7 +7,7 @@ _函数作为子组件是一种模式，允许你将渲染函数作为 `Children
 
 ------
 
-### 使用
+## 使用
 当你使用 Function 作为子组件时，可以将子组件指定为函数，而不是传递 JSX 标记。
 ```tsx
     // index.tsx
@@ -21,7 +22,7 @@ _函数作为子组件是一种模式，允许你将渲染函数作为 `Children
         return children('foo')
     }
 ```
-### 例子
+## 例子
 将函数作为子组件的高级示例。
 ```tsx
     // PageWidth.tsx
@@ -60,7 +61,7 @@ class PageWidth extends React.Component {
 
 ------
 
-### 其他使用方式
+## 其他使用方式
 <details>
 <summary>点击展开/折叠</summary>
 ```tsx
@@ -132,4 +133,4 @@ const props = {
 
 ---
 
-**转译自 [reactpatterns](https://reactpatterns.js.org/docs/function-as-child-component/)**
+**转译自 [reactpatterns](https://reactpatterns.js.org/docs/function-as-child-component/)**../../../src/components/Tag
