@@ -1,1 +1,135 @@
-# react functions As Children
+import Tag from '../../src/components/Tag'
+
+# 什么是React函数作为子组件(React functions As Children)
+<Tag tag='React'  />            
+_函数作为子组件是一种模式，允许你将渲染函数作为 `Children` 属性传递给组件，以便您可以更改可以作为子组件传递给组件的内容。_
+
+------
+
+### 使用
+当你使用 Function 作为子组件时，可以将子组件指定为函数，而不是传递 JSX 标记。
+```tsx
+    // index.tsx
+    <Foo>
+        {(name) => <div>`hello from ${name}`</div>}
+    </Foo>
+```
+`Foo`组件应该长这样
+```tsx
+    // Foo.tsx
+    const Foo = ({ children }) => {
+        return children('foo')
+    }
+```
+### 例子
+将函数作为子组件的高级示例。
+```tsx
+    // PageWidth.tsx
+import React from 'react'
+
+class PageWidth extends React.Component {
+  state = { width: 0 }
+
+  componentDidMount() {
+    this.setState({ width: window.innerWidth })
+
+    window.addEventListener(
+      'resize',
+      ({ target }) => {
+        this.setState({ width: target.innerWidth })
+      }
+    )
+  }
+
+  render() {
+    const { width } = this.state
+    //渲染传过来的函数
+    return this.props.children(width)
+  }
+}
+```
+使用方式
+```tsx
+    // index.tsx
+    <PageWidth>
+        {(width) => <div>{width}</div>}
+    </PageWidth>
+```
+正如在上面所看到的，`children` 被“重载”并作为函数传递给 `PageWidth` ，而不是按照自然的方式传递给 `ReactNodeList` 。 `PageWidth` 组件的 `render` 方法调用 `this.props.children` （传递宽度），该方法返回渲染的 `JSX。`
+在此示例中可以看到渲染回调的真正威力。 `PageWidth` 将完成所有繁重的工作，而渲染的具体内容可能会发生变化，具体取决于传递的渲染函数。
+
+------
+
+### 其他使用方式
+<details>
+<summary>点击展开/折叠</summary>
+```tsx
+    //HTTPPOST.tsx
+import { Component, ReactNode } from 'react';
+import axios, { AxiosResponse } from 'axios';
+
+interface Props<T> {
+	url: string;//url
+	condition: unknown;//参数
+	loading?: ReactNode;//loading
+	children: (data: T) => ReactNode;//渲染组件
+	dataOperate: (data: T) => T;//数据处理
+	error?: ReactNode;//错误渲染
+}
+
+interface State<T> {
+	data: T;
+	component: ReactNode;
+}
+
+export default class POST<T> extends Component<Props<T>, State<T>> {
+	state: State<T> = {
+		data: {} as T,
+		component: this.props.loading || '',
+	};
+	async componentDidMount() {
+		const { url, error, condition, children, dataOperate } = this.props;
+		try {
+			const result: AxiosResponse<T> = await axios.post(url, condition);
+			const processedData: T = dataOperate(result.data);
+			this.setState({
+				data: processedData,
+				component: children(processedData),
+			});
+		} catch (e) {
+			this.setState({ component: error || 'error' });
+			throw e;
+		}
+	}
+	render() {
+		return this.state.component;
+	}
+}
+
+```
+使用
+```tsx
+const props = {
+    url: '123321',
+    condition: {},
+    loading: <span>loading 一下</span>,
+    dataOperate: (data) => {
+        return data.sort((a, b) => a - b);
+    },
+    error: <span>出错了！</span>,
+}
+ <HTTPPOST {...props}>
+            {
+                (data) => {
+                    return data.map(item => {
+                        <span>{item}</span>
+                    })
+                }
+            }
+</HTTPPOST>
+```
+</details>
+
+---
+
+**转译自 [reactpatterns](https://reactpatterns.js.org/docs/function-as-child-component/)**
