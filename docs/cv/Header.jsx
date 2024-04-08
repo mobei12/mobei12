@@ -11,7 +11,7 @@ const Header = () => {
                     <Tag tag='Email' />：mobeigege@icloud.com
                 </div>
                 <div>
-                    <Tag tag='WeChat' />DEBUG__LIFE
+                    <Tag tag='WeChat' />：DEBUG__LIFE
                 </div>
             </div>
             <div className='user-img order-1 '>
