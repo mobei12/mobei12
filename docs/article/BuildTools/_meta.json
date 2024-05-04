@@ -5,7 +5,6 @@
     },
     {
         "type": "file",
-        "label": "在前端项目中使用pnpm的依赖",
         "name": "pnpmDep"
     }
 ]
