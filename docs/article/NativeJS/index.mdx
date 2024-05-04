@@ -1,0 +1,32 @@
+import Tag from '../../../src/components/Tag'
+import code from '../../../src/components/IntersectionObserver/index'
+
+# 使用IntersectionObserver实现视窗滚动时背景色变化
+<Tag tag='Javascript'  />
+## IntersectionObserver使用
+ 使用`IntersectionObserver`创建一个观察器对象，用于检测节点是否完全可见。当其监听到目标元素的可见部分（的比例）超过了一个或多个阈值（threshold）时，会执行指定的回调函数。
+```jsx pure
+// Block
+useEffect(() => {
+        const div = ref.current;
+        const observer = new IntersectionObserver(entries => {
+            const entry = entries[0];
+            if (entry.isIntersecting) {
+                div.style.backgroundColor = color;
+                div.innerHTML = `完全展示，显示背景色为${color}`;
+            } else {
+                div.style.backgroundColor = 'skyblue';
+                div.innerHTML = '未完全展示，显示背景色为skyblue';
+            }
+        }, {
+            threshold: 1.0
+        });
+        observer.observe(div);//开始监听
+        return () => {
+            observer.disconnect();//停止监听
+        }
+    }, []);
+```
+---
+## 演示实例
+<code src="../../../src/components/IntersectionObserver/index" previewMode="iframe" />

@@ -1,6 +1,6 @@
 import * as path from 'path';
 import { defineConfig } from 'rspress/config';
-
+import { pluginPreview } from '@rspress/plugin-preview';
 export default defineConfig({
   root: path.join(__dirname, 'docs'),
   title: '漠北',
@@ -11,6 +11,7 @@ export default defineConfig({
     dark: '/homepage_dark_icon.png',
   },
   base: '/mobei12/',
+  plugins: [pluginPreview()],
   themeConfig: {
     socialLinks: [
       { icon: 'github', mode: 'link', content: 'https://github.com/mobei12' },

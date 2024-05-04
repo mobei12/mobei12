@@ -22,6 +22,9 @@ const tagS = {
     'linux': 'Linux',
     'eslint': 'eslint',
     'wechat': 'wechat',
+    'npm': 'npm',
+    'pnpm': 'pnpm',
+    'yarn': 'Yarn',
     'email': 'maildotcom',
     'reactrouter': 'reactrouter'
 };

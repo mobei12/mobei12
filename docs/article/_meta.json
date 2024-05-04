@@ -10,6 +10,11 @@
         "name": "React"
     },
     {
+        "label": "NativeJS",
+        "type": "dir",
+        "name": "NativeJS"
+    },
+    {
         "label": "构建工具",
         "type": "dir",
         "name": "BuildTools"
