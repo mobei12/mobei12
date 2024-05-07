@@ -11,7 +11,7 @@ export default defineConfig({
     dark: '/homepage_dark_icon.png',
   },
   base: '/mobei12/',
-  plugins: [pluginPreview()],
+  plugins: [pluginPreview({defaultRenderMode: 'pure'})],
   themeConfig: {
     socialLinks: [
       { icon: 'github', mode: 'link', content: 'https://github.com/mobei12' },
