@@ -1,0 +1,90 @@
+import { PackageManagerTabs } from '@theme';
+
+在前端项目中使用 Husky 可以帮助你在 Git 钩子（hooks）上运行脚本，从而在代码提交前执行一些检查或任务，例如代码格式化、代码质量检查等。以下是如何在项目中设置和使用 Husky 的步骤：
+
+1. 安装 Husky
+首先，你需要在项目中安装 Husky。确保你已经初始化了一个 Node.js 项目（即项目中有 package.json 文件）。
+
+<PackageManagerTabs command={{npm: 'npm install husky --save-dev',yarn: 'yarn add husky --dev'}} />
+2. 初始化 Husky
+安装 Husky 后，需要初始化它。这将创建一个 .husky 目录来存放 Git 钩子。
+
+```bash
+npx husky install
+```
+你还可以在 package.json 中添加一行来自动初始化 Husky（例如在安装依赖后）：
+
+```json
+{
+  "scripts": {
+    "prepare": "husky install"
+  }
+}
+```
+3. 添加 Git 钩子
+使用 Husky，你可以很方便地添加 Git 钩子。例如，添加一个 pre-commit 钩子来在每次提交代码前运行脚本：
+
+```bash
+npx husky add .husky/pre-commit "npm test"
+```
+这条命令将在 .husky/pre-commit 文件中添加如下内容：
+
+```bash
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+```
+```bash
+npm test
+```
+4. 配置其他钩子
+你可以添加其他钩子，例如 pre-push、commit-msg 等。例如，添加 commit-msg 钩子来检查提交消息格式：
+
+```bash
+npx husky add .husky/commit-msg 'npx commitlint --edit "$1"'
+```
+然后确保你安装了 commitlint：
+
+```bash
+npm install @commitlint/config-conventional @commitlint/cli --save-dev
+```
+并在项目根目录创建 commitlint.config.js 文件：
+
+```javascript
+module.exports = {
+  extends: ['@commitlint/config-conventional']
+};
+```
+5. 在 Git 钩子中运行自定义脚本
+你可以在 Git 钩子中运行任何自定义脚本。例如，在提交代码前运行代码格式化工具 Prettier 和代码检查工具 ESLint：
+
+```bash
+npx husky add .husky/pre-commit "npx prettier --write . && npx eslint ."
+```
+完整示例
+以下是一个完整的示例，包括安装 Husky、初始化 Husky 以及配置 pre-commit 钩子来运行 Prettier 和 ESLint：
+
+初始化 Node.js 项目（如果尚未初始化）：
+```bash
+npm init -y
+```
+安装 Husky、Prettier 和 ESLint：
+```bash
+npm install husky prettier eslint --save-dev
+```
+初始化 Husky：
+```bash
+npx husky install
+```
+在 package.json 中添加 prepare 脚本：
+```json
+{
+  "scripts": {
+    "prepare": "husky install"
+  }
+}
+```
+添加 pre-commit 钩子：
+```bash
+npx husky add .husky/pre-commit "npx prettier --write . && npx eslint ."
+```
+通过上述步骤，你已经成功地在项目中配置了 Husky，并在每次提交代码前运行 Prettier 和 ESLint。这样可以确保提交的代码符合项目的格式和质量标准。
