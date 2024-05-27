@@ -8,5 +8,10 @@
         "type": "file",
         "label": "Web前端开发标准规范归纳",
         "name": "web-guide"
+    },
+    {
+        "type": "file",
+        "label": "husky",
+        "name": "git-husky"
     }
 ]
