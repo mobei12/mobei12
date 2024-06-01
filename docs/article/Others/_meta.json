@@ -11,7 +11,7 @@
     },
     {
         "type": "file",
-        "label": "husky",
+        "label": "使用husky在Git提交代码时进行代码检查",
         "name": "git-husky"
     }
 ]

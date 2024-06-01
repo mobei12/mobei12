@@ -1,90 +1,141 @@
 import { PackageManagerTabs } from '@theme';
+import Tag from '../../../src/components/Tag'
 
+# 使用husky在Git提交代码时进行代码检查
+
+<Tag tag='Git'  />
 在前端项目中使用 Husky 可以帮助你在 Git 钩子（hooks）上运行脚本，从而在代码提交前执行一些检查或任务，例如代码格式化、代码质量检查等。以下是如何在项目中设置和使用 Husky 的步骤：
 
-1. 安装 Husky
+## 安装 Husky
 首先，你需要在项目中安装 Husky。确保你已经初始化了一个 Node.js 项目（即项目中有 package.json 文件）。
 
-<PackageManagerTabs command={{npm: 'npm install husky --save-dev',yarn: 'yarn add husky --dev'}} />
-2. 初始化 Husky
+<PackageManagerTabs command={{npm: 'npm install husky -D',yarn: 'yarn add husky --dev'}} />
+## 初始化 Husky
 安装 Husky 后，需要初始化它。这将创建一个 .husky 目录来存放 Git 钩子。
 
 ```bash
 npx husky install
 ```
-你还可以在 package.json 中添加一行来自动初始化 Husky（例如在安装依赖后）：
 
-```json
+## 在Git钩子中使用
+### 使用pre-commit钩子检测代码格式
+#### 安装lint-staged、prettier、eslint
+<PackageManagerTabs command={{npm: 'npm install -D  lint-staged eslint prettier',yarn: 'yarn add lint-staged eslint prettier -D'}} />
+#### 配置.eslintrc.js、.prettierrc.json,.stylelintrc.js
+根据自己配置，添加对应的依赖和文件
+```bash
+npm install -D @babel/core @babel/eslint-parser @babel/preset-env @babel/preset-react @babel/plugin-transform-runtime @typescript-eslint/parser eslint eslint-plugin-import eslint-plugin-prettier eslint-plugin-@typescript-eslint 
+```
+```js
+// .eslintrc.js
+module.exports = {
+	env: {
+	  browser: true, // 浏览器端
+	  commonjs: true, // 支持CJS
+	  es2021: true, // 支持ES2021及之前的所有语法
+	},
+	extends: [
+	  'eslint:recommended',
+	  'airbnb-base',
+	  'plugin:@typescript-eslint/recommended',
+	  'plugin:prettier/recommended', // 使用 Prettier 来自动格式化代码
+	  'prettier', // 使用 Prettier 来自动格式化代码
+	],
+	parser: '@babel/eslint-parser',
+	plugins: ['import', '@typescript-eslint', 'prettier'],
+	overrides: [
+	  {
+		files: ['*.ts', '*.tsx'],
+		parser: '@typescript-eslint/parser',
+	  },
+	],
+	parserOptions: {
+	  ecmaFeatures: {
+		experimentalObjectRestSpread: true,
+		jsx: true,
+	  },
+	  ecmaVersion: 'latest',
+	  sourceType: 'module',
+	},
+	settings: {
+	  'import/extensions': ['.js', '.jsx', '.tsx', '.ts'],
+	  'import/resolver': {
+		node: { extensions: ['.js', '.jsx', '.tsx', '.ts'] },
+		alias: {
+		  map: [['src', './src']],
+		  extensions: ['.js', '.jsx', '.tsx', '.ts'],
+		},
+	  },
+	},
+	rules: {
+	  // 添加你的规则
+	  'no-extra-semi': 'error', // 禁止多余的分号
+	  'comma-dangle': 'off', // 关闭逗号结尾规则
+	  'linebreak-style': 'off', // 关闭换行风格规则
+	  'object-curly-spacing': 'off', // 关闭对象大括号内的空格规则
+	  'no-shadow': 'off', // 关闭变量声明遮蔽检查
+	  'default-param-last': 'off', // 关闭默认参数在最后的规则
+	  'prettier/prettier': ['error'], // 启用 Prettier 规则
+	},
+  };
+```
+```js
+// .prettierrc.js
 {
-  "scripts": {
-    "prepare": "husky install"
-  }
+	"arrowParens": "always",
+	"jsxBracketSameLine": false,
+	"printWidth": 120,
+	"semi": true,
+	"singleQuote": true,
+	"tabWidth": 4,
+	"trailingComma": "all",
+	"useTabs": true
 }
 ```
-3. 添加 Git 钩子
-使用 Husky，你可以很方便地添加 Git 钩子。例如，添加一个 pre-commit 钩子来在每次提交代码前运行脚本：
-
-```bash
-npx husky add .husky/pre-commit "npm test"
-```
-这条命令将在 .husky/pre-commit 文件中添加如下内容：
-
-```bash
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-```
-```bash
-npm test
-```
-4. 配置其他钩子
-你可以添加其他钩子，例如 pre-push、commit-msg 等。例如，添加 commit-msg 钩子来检查提交消息格式：
-
-```bash
-npx husky add .husky/commit-msg 'npx commitlint --edit "$1"'
-```
-然后确保你安装了 commitlint：
-
-```bash
-npm install @commitlint/config-conventional @commitlint/cli --save-dev
-```
-并在项目根目录创建 commitlint.config.js 文件：
-
-```javascript
+```js
+// .stylelintrc.js
 module.exports = {
-  extends: ['@commitlint/config-conventional']
+  rules: {
+    "block-no-empty": true
+  }
 };
 ```
-5. 在 Git 钩子中运行自定义脚本
-你可以在 Git 钩子中运行任何自定义脚本。例如，在提交代码前运行代码格式化工具 Prettier 和代码检查工具 ESLint：
-
-```bash
-npx husky add .husky/pre-commit "npx prettier --write . && npx eslint ."
-```
-完整示例
-以下是一个完整的示例，包括安装 Husky、初始化 Husky 以及配置 pre-commit 钩子来运行 Prettier 和 ESLint：
-
-初始化 Node.js 项目（如果尚未初始化）：
-```bash
-npm init -y
-```
-安装 Husky、Prettier 和 ESLint：
-```bash
-npm install husky prettier eslint --save-dev
-```
-初始化 Husky：
-```bash
-npx husky install
-```
-在 package.json 中添加 prepare 脚本：
+具体可参考官网配置，以上仅作示例
+#### 配置lint-staged
+package.json 中添加不同文件在 git 提交执行的 lint 检测配置
 ```json
 {
   "scripts": {
-    "prepare": "husky install"
+    "lint:lint-staged": "lint-staged"
+  }
+  "lint-staged": {
+    "*.{js,ts,vue}": [//文件类型根据自己项目需求配置
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ],
+    "*.{cjs,json}": [
+      "prettier --write"
+    ],
+    "*.{vue,html}": [
+      "eslint --fix",
+      "prettier --write",
+      "stylelint --fix"
+    ],
+    "*.{scss,css}": [
+      "stylelint --fix",
+      "prettier --write"
+    ],
+    "*.md": [
+      "prettier --write"
+    ]
   }
 }
 ```
-添加 pre-commit 钩子：
+
+根目录 .husky 目录下 pre-commit 文件中的 npm test 修改为
 ```bash
-npx husky add .husky/pre-commit "npx prettier --write . && npx eslint ."
+npm run lint:lint-staged
 ```
-通过上述步骤，你已经成功地在项目中配置了 Husky，并在每次提交代码前运行 Prettier 和 ESLint。这样可以确保提交的代码符合项目的格式和质量标准。
+每次运行 ```git commit``` 时，将会自动执行 lint-staged 中配置的命令，对代码进行格式化和检查。
+也可以 ```gid add .``` 之后 ```npm run lint:lint-staged``` 进行代码格式化和检查
