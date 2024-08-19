@@ -8,6 +8,8 @@
     "preview": "rspress preview"
   },
   "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "rspress": "^1.28.0"
   },
   "devDependencies": {
