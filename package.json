@@ -8,11 +8,11 @@
     "preview": "rspress preview"
   },
   "dependencies": {
-    "rspress": "^1.26.3"
+    "rspress": "^1.28.0"
   },
   "devDependencies": {
-    "@rspress/plugin-preview": "^1.26.3",
-    "@types/node": "^20.14.12"
+    "@rspress/plugin-preview": "^1.28.0",
+    "@types/node": "^22.4.1"
   },
   "keywords": [
     "rspress",
