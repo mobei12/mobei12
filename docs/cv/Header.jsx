@@ -1,5 +1,5 @@
 import Tag from '../../src/components/Tag'
-import img from '../public/mobei12.jpg'
+import img from '../public/mobei12.png'
 const Header = () => {
     return (
         <div className=' flex  flex-col md:flex-row max-w-6xl min-h-[35vh] mt-12 sm:mt-0 justify-between'>
