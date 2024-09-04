@@ -3,11 +3,25 @@ import code from '../../../src/components/IntersectionObserver/index'
 
 # 使用IntersectionObserver监测容器展示状态
 <Tag tag='Javascript'  />
-## IntersectionObserver使用
+
+>`IntersectionObserver` 是一个用于检测元素是否在可视窗口内或其他指定元素内的 API。它非常适合懒加载图像、无限滚动、或者执行某些操作（如动画）当元素进入或离开视口时。
+
+## IntersectionObserver基本使用
  使用`IntersectionObserver`创建一个观察器对象，用于检测节点是否完全可见。当其监听到目标元素的可见部分（的比例）超过了一个或多个阈值（threshold）时，会执行指定的回调函数。
 ```jsx pure
-// Block
-useEffect(() => {
+/*Block.jsx*/
+/**
+ * 参数说明
+ *  entries：一个 IntersectionObserverEntry 对象的数组，每个对象代表被观察的元素及其可见性的信息。
+    observer：IntersectionObserver 实例本身，可以在回调中用于停止观察（如 observer.unobserve(entry.target)）。
+    root：用作视口的元素，默认为浏览器视口。
+    rootMargin：定义 root 的外边距（例如 "10px 20px 30px 40px"）。
+    threshold：当被观察元素的可见部分超过指定阈值（0.0 - 1.0）时，触发回调。
+*/
+import { useRef, useEffect } from 'react';
+export default ({ color = 'black' }) => {
+    const ref = useRef(null)
+    useEffect(() => {
         const div = ref.current;
         const observer = new IntersectionObserver(entries => {
             const entry = entries[0];
@@ -19,14 +33,31 @@ useEffect(() => {
                 div.innerHTML = '未完全展示，显示背景色为skyblue';
             }
         }, {
-            threshold: 1.0
+            root: null, // 默认为视口
+            rootMargin: '0px', // 可以通过指定边距来增加或减少 root 元素的尺寸
+            threshold: 1.0 // 0.0 - 1.0 ： 0.0 表示完全不可见，1.0 表示完全可见,当前情况指完全进入视窗时触发回调
         });
-        observer.observe(div);//开始监听
+        observer.observe(div);
         return () => {
-            observer.disconnect();//停止监听
+            observer.disconnect();
         }
     }, []);
+    return (
+        <div ref={ref} style={{
+            height: "200%",
+            width: "100%",
+            border: '2px solid black',
+            textAlign: 'center',
+            lineHeight: '200px',
+            backgroundColor: color
+        }} > 块容器</div>
+    )
+}
 ```
----
 ## 演示实例
 <code src="../../../src/components/IntersectionObserver/index" previewMode="iframe"  />
+### 使用场景
+- 懒加载图片或内容：仅在内容进入视口时加载，从而节省带宽和资源。
+- 无限滚动：当用户接近页面底部时加载更多内容。
+- 执行动画：当元素进入视口时，触发动画或特效。
+- 广告曝光统计：检测广告是否在用户的视口中出现，以及出现的时间。
