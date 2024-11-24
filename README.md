@@ -13,3 +13,5 @@
 - 🔧 &nbsp; ![Visual Studio Code](https://img.shields.io/badge/-Visual%20Studio%20Code-333333?style=flat&logo=visual-studio-code&logoColor=007ACC)
 #### 🛠 The project I built React18+TS5+Webpack
 -  [here](https://github.com/mobei12/React-ts-webpack)
+
+ Based on this I created a version of rsbuild, on the `chore/Rsbuild-test` version [here](https://github.com/mobei12/React-ts-webpack/tree/chore/Rsbuild-test)
