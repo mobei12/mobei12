@@ -13,10 +13,5 @@
         "type": "file",
         "label": "使用husky在Git提交代码时进行代码检查",
         "name": "git-husky"
-    },
-    {
-        "type": "file",
-        "label": "new URL 构造函数使用遇到的坑",
-        "name": "new-url-error"
     }
 ]
