@@ -24,6 +24,8 @@ const tagS = {
     'wechat': 'wechat',
     'npm': 'npm',
     'pnpm': 'pnpm',
+    'tailwindcss': 'Tailwindcss',
+    'shadcn':'shadcn',
     'yarn': 'Yarn',
     'email': 'maildotcom',
     'reactrouter': 'reactrouter'
