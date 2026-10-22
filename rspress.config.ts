@@ -3,6 +3,7 @@ import { defineConfig } from '@rspress/core';
 import { pluginPreview } from '@rspress/plugin-preview';
 export default defineConfig({
   root: path.join(__dirname, 'docs'),
+  globalStyles: path.join(__dirname, 'styles/global.css'),
   lang: 'zh',
   title: '漠北',
   description: '记录分享和分享我的文章，',

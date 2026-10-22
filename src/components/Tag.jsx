@@ -58,7 +58,7 @@ const Tag = ({ tag }) => {
         height: '1.5em'
     }
     return(
-        <img src={getUrl(tag)} alt={tag} title={tag} style={imgStyle}/>
+        <img className="cv-tag" src={getUrl(tag)} alt={tag} title={tag} style={imgStyle}/>
     )
 }
 export default Tag
