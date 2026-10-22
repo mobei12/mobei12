@@ -28,7 +28,12 @@ const tagS = {
     'shadcn':'shadcn',
     'yarn': 'Yarn',
     'email': 'maildotcom',
-    'reactrouter': 'reactrouter'
+    'reactrouter': 'reactrouter',
+    'go': 'go',
+    'python': 'python',
+    'rust': 'rust',
+    'turborepo': 'turborepo',
+    'tauri': 'tauri'
 };
 
 /**
