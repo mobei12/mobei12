@@ -1,0 +1,6 @@
+{
+  "redirects": [
+    { "source": "/mobei12", "destination": "/", "permanent": true },
+    { "source": "/mobei12/:path*", "destination": "/:path*", "permanent": true }
+  ]
+}
