@@ -77,7 +77,7 @@ export default function Home() {
 
         <TiltCard className="bx-loc">
           <p className="bx-label">坐标 & 联系</p>
-          <h3>📍 深圳 · 来自西安</h3>
+          <h3>📍 深圳</h3>
           <p className="bx-muted">爱好：电影🎬 单车🚲 音乐🎵 做饭👨‍🍳</p>
           <div className="bx-links">
             <a href="https://github.com/mobei12" target="_blank" rel="noreferrer">GitHub</a>
