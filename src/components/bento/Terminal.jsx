@@ -1,0 +1,64 @@
+import { useEffect, useRef, useState } from 'react';
+import { withBase } from '@rspress/core/runtime';
+
+const CMDS = {
+  help: () => ['可用命令: help, whoami, zenflux, stack, projects, cv, clear'],
+  whoami: () => ['MoBei（漠北）· 全栈开发工程师', '来自西安，2015 年本科，软件工程，深漂至今'],
+  zenflux: () => [
+    'Zenflux（ZenfluxAIOS / Dazee）· 全栈开发工程师 · 至今',
+    '› Ontology 低代码 Interface 配置平台',
+    '› Widget 协议 / 注册与发布流水线 / 开发者中心',
+    '› Agent 驱动 UI：A2UI、iframe 嵌入',
+    '› Go 后端 + Python Agent Runtime + Tauri 桌面 AI CLI',
+  ],
+  stack: () => ['frontend: React 19, TypeScript, Vite, Tailwind, Vue, Svelte', 'backend : Go, Node.js, Express, Python', 'tooling : Turborepo, pnpm, Tauri, Rsbuild, webpack, Git', 'learning: Rust 🦀'],
+  projects: () => ['React-ts-webpack  React + TS + Webpack 模板', 'proxychains-rs    Rust 版 proxychains', 'vite-svelte       Vite + Svelte playground'],
+};
+
+export default function Terminal() {
+  const [lines, setLines] = useState([{ t: 'sys', s: "输入 'help' 查看命令" }]);
+  const [input, setInput] = useState('');
+  const [busy, setBusy] = useState(false);
+  const body = useRef(null);
+  const inp = useRef(null);
+  useEffect(() => { if (body.current) body.current.scrollTop = body.current.scrollHeight; }, [lines]);
+
+  const type = async (out) => {
+    const fast = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    setBusy(true);
+    for (const l of out) {
+      if (fast) { setLines((p) => [...p, { t: 'out', s: l }]); continue; }
+      setLines((p) => [...p, { t: 'out', s: '' }]);
+      for (let i = 1; i <= l.length; i += 2) {
+        await new Promise((r) => setTimeout(r, 12));
+        setLines((p) => { const c = p.slice(); c[c.length - 1] = { t: 'out', s: l.slice(0, i + 1) }; return c; });
+      }
+    }
+    setBusy(false);
+  };
+  const run = (e) => {
+    e.preventDefault();
+    if (busy) return;
+    const cmd = input.trim().toLowerCase();
+    setInput('');
+    if (cmd === 'clear') return setLines([]);
+    setLines((p) => [...p, { t: 'in', s: cmd }]);
+    if (!cmd) return;
+    if (cmd === 'cv') { type(['正在打开简历…']); setTimeout(() => (window.location.href = withBase('/cv/')), 600); return; }
+    type(CMDS[cmd] ? CMDS[cmd]() : [`command not found: ${cmd}，试试 help`]);
+  };
+  return (
+    <div className="bx-term" onClick={() => inp.current?.focus({ preventScroll: true })}>
+      <div className="bx-term-bar"><i /><i /><i /><span>mobei@zenflux: ~</span></div>
+      <div className="bx-term-body" ref={body}>
+        {lines.map((l, i) => (
+          <div key={i} className={`bx-l-${l.t}`}>{l.t === 'in' && <b>❯ </b>}{l.s}</div>
+        ))}
+        <form onSubmit={run} className="bx-term-input">
+          <b>❯</b>
+          <input ref={inp} value={input} onChange={(e) => setInput(e.target.value)} aria-label="终端输入" autoComplete="off" spellCheck="false" />
+        </form>
+      </div>
+    </div>
+  );
+}
