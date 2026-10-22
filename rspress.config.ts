@@ -1,8 +1,9 @@
 import * as path from 'path';
-import { defineConfig } from 'rspress/config';
+import { defineConfig } from '@rspress/core';
 import { pluginPreview } from '@rspress/plugin-preview';
 export default defineConfig({
   root: path.join(__dirname, 'docs'),
+  lang: 'zh',
   title: '漠北',
   description: '记录分享和分享我的文章，',
   icon: '/mobei_icon.png',
@@ -12,15 +13,29 @@ export default defineConfig({
   },
   // Vercel 部署在根路径，GitHub Pages 部署在 /mobei12/
   base: process.env.VERCEL ? '/' : '/mobei12/',
-  plugins: [pluginPreview({defaultRenderMode: 'pure'})],
+  i18nSource: {
+    lastUpdatedText: { zh: '最后更新时间', en: 'Last Updated' },
+    searchPlaceholderText: { zh: '搜索文章', en: 'Search' },
+  },
+  builderConfig: {
+    resolve: { alias: { '@components': path.join(__dirname, 'src/components') } },
+  },
+  plugins: [
+    pluginPreview({
+      defaultRenderMode: 'pure',
+      iframeOptions: {
+        builderConfig: {
+          resolve: { alias: { '@components': path.join(__dirname, 'src/components') } },
+        },
+      },
+    }),
+  ],
   themeConfig: {
     socialLinks: [
       { icon: 'github', mode: 'link', content: 'https://github.com/mobei12' },
       { icon: 'juejin', mode: 'link', content: 'https://juejin.cn/user/571401775883960' },
     ],
-    lastUpdatedText: '最后更新时间',
     lastUpdated: true,
-    searchPlaceholderText: '搜索文章',
     enableContentAnimation: true,
     enableScrollToTop: true,
   },

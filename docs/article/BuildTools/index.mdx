@@ -6,19 +6,19 @@ import Tag from '../../../src/components/Tag'
 ## 定义环境变量
 ### 在根目录下创建.env文件
 `base.env`
-```env
+```ini
 #基础配置，不管开发或者测试环境都用得到,使用CUSTOMIZE前缀，和node的环境变量区分
 CUSTOMIZE_APP_TITLE=一个系统
 ```
 `dev.env`
-```env
+```ini
 #测试开发环境信息
 CUSTOMIZE_PORT=8081
 CUSTOMIZE_SERVER_URL='http://localhost:8000'
 CUSTOMIZE_MODE='development'
 ```
 `prod.env`
-```env
+```ini
 #正式环境信息
 CUSTOMIZE_MODE='production'
 CUSTOMIZE_PORT=80
