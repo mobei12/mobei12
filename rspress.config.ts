@@ -10,7 +10,8 @@ export default defineConfig({
     light: '/homepage_light_icon.png',
     dark: '/homepage_dark_icon.png',
   },
-  base: '/mobei12/',
+  // Vercel 部署在根路径，GitHub Pages 部署在 /mobei12/
+  base: process.env.VERCEL ? '/' : '/mobei12/',
   plugins: [pluginPreview({defaultRenderMode: 'pure'})],
   themeConfig: {
     socialLinks: [
