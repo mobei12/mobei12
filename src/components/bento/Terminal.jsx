@@ -3,15 +3,15 @@ import { withBase } from '@rspress/core/runtime';
 
 const CMDS = {
   help: () => ['可用命令: help, whoami, zenflux, work, stack, projects, cv, clear'],
-  whoami: () => ['MoBei（漠北）· 全栈开发工程师', '来自西安，2015 年本科，软件工程，深漂至今'],
+  whoami: () => ['MoBei（漠北）· AI Agent 前端架构', '让 Agent 说出可交互界面 · 西安本科 · 深漂'],
   zenflux: () => [
-    'Zenflux（ZenfluxAIOS）· 全栈开发工程师 · 前端架构 · 2025.10 至今',
-    '› A2UI 生成式 UI 协议与运行时',
-    '› Agent 流式卡片协议 / 意图契约 / 嵌入桥',
-    '› Widget 开放生态：Manifest、Studio 模板、发布审核与版本（Go）',
-    '› Design Token 合同（34 项）+ 契约测试 + 多主题',
-    '› 多端 Monorepo + CI + AI 编码治理',
-    "› 输入 'work' 查看工作项目页",
+    'Zenflux（ZenfluxAIOS）· AI Agent 前端架构 · 2025.10 至今',
+    '› 让 Agent 说出界面：A2UI 协议与生成式 UI 运行时',
+    '› 对话流式卡片 / 意图契约 / 嵌入桥 / MCP 管理',
+    '› Widget 生态：Manifest · Studio · 发布与版本',
+    '› Ontology 对话驱动的页面配置',
+    '› Token 合同 · AI 编码治理 · Monorepo 底座',
+    "› 输入 'work' 打开工作项目页",
   ],
   work: () => { if (typeof window !== 'undefined') setTimeout(() => { window.location.href = withBase('/work/'); }, 400); return ['正在打开 /work/ ...']; },
   stack: () => ['frontend: React 19, TypeScript, Vite, Tailwind, Vue, Svelte', 'backend : Go (Gin/GORM), Node.js, Express', 'tooling : Turborepo, pnpm, Tauri, Rsbuild, webpack, Git', 'learning: Rust 🦀'],

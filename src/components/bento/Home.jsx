@@ -19,7 +19,7 @@ export default function Home() {
           <img src={withBase('/mobei12.png')} alt="MoBei" className="bx-avatar" />
           <p className="bx-kicker">Hi, I'm</p>
           <h1 className="bx-name"><ScrambleText text="MOBEI · 漠北" /></h1>
-          <p className="bx-lead">全栈开发工程师 · 前端架构 · 现于 <b>Zenflux</b> 负责 AI Agent 平台（ZenfluxAIOS）的前端架构。记录，分享。</p>
+          <p className="bx-lead">AI Agent 前端架构 · 现于 <b>Zenflux</b> 让 Agent「说出」可交互界面（A2UI · 流式卡片 · Widget）。记录，分享。</p>
           <div className="bx-actions">
             <a className="bx-btn bx-btn-pri" href={withBase('/article/')}>查看文章</a>
             <a className="bx-btn" href={withBase('/work/')}>工作项目</a>
@@ -31,10 +31,10 @@ export default function Home() {
           <p className="bx-label">● 当前工作</p>
           <h3>Zenflux · ZenfluxAIOS</h3>
           <ul>
-            <li>A2UI 生成式 UI 协议与运行时</li>
-            <li>Agent 流式卡片协议 · 意图契约 · 嵌入桥</li>
-            <li>Widget 开放生态：Manifest · Studio · 发布与版本</li>
-            <li>Design Token 合同 · 多端 Monorepo · AI 编码治理</li>
+            <li>让 Agent 说出界面：A2UI 协议与运行时</li>
+            <li>对话里的流式卡片 · 意图契约 · 嵌入桥</li>
+            <li>Widget 生态：人与 Agent 共用组件目录</li>
+            <li>Token 合同 · AI 编码治理 · Monorepo 底座</li>
           </ul>
           <a className="bx-more" href={withBase('/work/')}>查看工作项目 →</a>
         </TiltCard>

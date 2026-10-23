@@ -4,9 +4,9 @@ sidebar: false
 
 import Flow from '../../src/components/work/Flow'
 
-# 工作项目 · Zenflux AI Agent 平台前端
+# 工作项目 · 让 Agent「说出」界面
 
-> 我在 Zenflux 担任全栈开发工程师，负责 AI Agent 平台（ZenfluxAIOS）的前端架构。本页只在概念层面介绍我负责的方向，不涉及内部代码、接口和客户数据。
+> 我在 Zenflux 负责 AI Agent 平台（ZenfluxAIOS）的**前端架构**：核心不是堆技术栈，而是让 Agent 能输出可交互界面——A2UI 协议、流式卡片、Widget 生态与对话驱动的页面配置。本页只谈概念，不涉及内部代码、接口和客户数据。
 
 ## 一、A2UI：Agent 驱动的生成式 UI
 
@@ -76,13 +76,12 @@ Agent 的回复是**边生成边展示**的。我设计了基于 WebSocket 的�
 - 修复焦点环、危险色的对比度，使其满足可访问性要求；支持多套主题预设一键切换
 - 令牌包按语义化版本发布，CI 会检查主题改动是否同步升级了版本
 
-## 五、多端 Monorepo、CI 与 AI 编码治理
+## 五、AI 编码治理与工程底座
 
-- 从零搭建并维护前端 Monorepo（pnpm + Turbo）：C 端工作台、机构 / 平台后台、H5、小程序、桌面端、文档站，加上一组共享包（UI、图标、多语言、表单 Schema、认证等）
-- 主栈统一到 React 19 + TypeScript + Vite + Zustand + React Query + Tailwind CSS 4
-- 多应用 CI 流水线：按应用和环境拆分构建与部署
 - **AI 编码治理**：为仓库编写 AGENTS.md、Rules、Skills，配合 commit hook、commitlint、样式类名门禁，让 AI 编码工具在规范内稳定交付
 - 维护跨团队的接口文档中心（Markdown + llms.txt），让人和 AI 都能读懂接口
+- 多端 Monorepo（pnpm + Turbo）：工作台、后台、H5、小程序、桌面端、文档站 + 共享包；多应用 CI
+- 主栈（底座，不是卖点）：React 19 · TypeScript · Vite · Zustand · React Query · Tailwind CSS 4
 
 相关文章（草稿）：
 
