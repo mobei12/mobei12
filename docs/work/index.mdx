@@ -76,10 +76,11 @@ Agent 的回复是**边生成边展示**的。我设计了基于 WebSocket 的�
 - 修复焦点环、危险色的对比度，使其满足可访问性要求；支持多套主题预设一键切换
 - 令牌包按语义化版本发布，CI 会检查主题改动是否同步升级了版本
 
-## 五、AI 编码治理与工程底座
+## 五、规范、知识库、原型 Demo 与工程底座
 
-- **AI 编码治理**：为仓库编写 AGENTS.md、Rules、Skills，配合 commit hook、commitlint、样式类名门禁，让 AI 编码工具在规范内稳定交付
-- 维护跨团队的接口文档中心（Markdown + llms.txt），让人和 AI 都能读懂接口
+- **前端主仓规范**：我制定了主仓研发规范——目录与包边界、中文 commit、ESLint / Prettier / Husky 门禁、分支与交付检查；并编写 AGENTS.md、Rules、Skills，让人和 AI 编码工具共用同一套约束
+- **团队知识库**：推动落地跨项目文档中心（Markdown 树 + llms.txt / 多工具 Agent 入口），配套写接口、收录资料、文档 Lint 等 Skills，人和 Agent 按同一套文档协作
+- **可运行原型 Demo**：提出并主导 A2UI 统一运行时原型 Demo（协议 → 注册表 → 设计器 → 业务呈现），用 mock 后端先验证契约与开放项，兼作技术评审演示，再回灌正式产品
 - 多端 Monorepo（pnpm + Turbo）：工作台、后台、H5、小程序、桌面端、文档站 + 共享包；多应用 CI
 - 主栈（底座，不是卖点）：React 19 · TypeScript · Vite · Zustand · React Query · Tailwind CSS 4
 
