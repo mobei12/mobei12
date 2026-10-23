@@ -2,16 +2,19 @@ import { useEffect, useRef, useState } from 'react';
 import { withBase } from '@rspress/core/runtime';
 
 const CMDS = {
-  help: () => ['可用命令: help, whoami, zenflux, stack, projects, cv, clear'],
+  help: () => ['可用命令: help, whoami, zenflux, work, stack, projects, cv, clear'],
   whoami: () => ['MoBei（漠北）· 全栈开发工程师', '来自西安，2015 年本科，软件工程，深漂至今'],
   zenflux: () => [
-    'Zenflux（ZenfluxAIOS / Dazee）· 全栈开发工程师 · 至今',
-    '› Ontology 低代码 Interface 配置平台',
-    '› Widget 协议 / 注册与发布流水线 / 开发者中心',
-    '› Agent 驱动 UI：A2UI、iframe 嵌入',
-    '› Go 后端 + Python Agent Runtime + Tauri 桌面 AI CLI',
+    'Zenflux（ZenfluxAIOS）· 全栈开发工程师 · 前端架构 · 2025.10 至今',
+    '› A2UI 生成式 UI 协议与运行时',
+    '› Agent 流式卡片协议 / 意图契约 / 嵌入桥',
+    '› Widget 开放生态：Manifest、Studio 模板、发布审核与版本（Go）',
+    '› Design Token 合同（34 项）+ 契约测试 + 多主题',
+    '› 多端 Monorepo + CI + AI 编码治理',
+    "› 输入 'work' 查看工作项目页",
   ],
-  stack: () => ['frontend: React 19, TypeScript, Vite, Tailwind, Vue, Svelte', 'backend : Go, Node.js, Express, Python', 'tooling : Turborepo, pnpm, Tauri, Rsbuild, webpack, Git', 'learning: Rust 🦀'],
+  work: () => { if (typeof window !== 'undefined') setTimeout(() => { window.location.href = withBase('/work/'); }, 400); return ['正在打开 /work/ ...']; },
+  stack: () => ['frontend: React 19, TypeScript, Vite, Tailwind, Vue, Svelte', 'backend : Go (Gin/GORM), Node.js, Express', 'tooling : Turborepo, pnpm, Tauri, Rsbuild, webpack, Git', 'learning: Rust 🦀'],
   projects: () => ['React-ts-webpack  React + TS + Webpack 模板', 'proxychains-rs    Rust 版 proxychains', 'vite-svelte       Vite + Svelte playground'],
 };
 

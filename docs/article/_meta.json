@@ -5,6 +5,11 @@
         "label": "文章概览"
     },
     {
+        "label": "架构与工程实践",
+        "type": "dir",
+        "name": "Architecture"
+    },
+    {
         "label": "React相关",
         "type": "dir",
         "name": "React"

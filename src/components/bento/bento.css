@@ -64,3 +64,4 @@
 @media (max-width:960px){.bx-grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:640px){.bx-grid{grid-template-columns:1fr}.bx-grid>.bx-card{grid-column:auto;grid-row:auto}.bx-root{padding:16px 12px 40px}}
 @media (prefers-reduced-motion:reduce){.bx-card,.bx-shiny::before,.bx-track{animation:none!important}.bx-card{transition:none}}
+.bx-more{display:inline-block;margin-top:10px;font-size:13.5px;font-weight:600;color:var(--mb-c2)}

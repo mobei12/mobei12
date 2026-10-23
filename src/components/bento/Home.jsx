@@ -3,7 +3,7 @@ import { Particles, TiltCard, ScrambleText, CountUp } from './Effects';
 import Terminal from './Terminal';
 import './bento.css';
 
-const STACK = ['React 19', 'TypeScript', 'Vite', 'Tailwind', 'Vue', 'Svelte', 'Go', 'Node.js', 'Express', 'Python', 'Turborepo', 'pnpm', 'Tauri', 'Rsbuild', 'webpack', 'Git', 'eCharts', 'DataV', 'Rust 🦀'];
+const STACK = ['React 19', 'TypeScript', 'Vite', 'Tailwind', 'Vue', 'Svelte', 'Go', 'Node.js', 'Express', 'Turborepo', 'pnpm', 'Tauri', 'Rsbuild', 'webpack', 'Git', 'eCharts', 'Rust 🦀'];
 const PROJECTS = [
   { name: 'React-ts-webpack', desc: 'React + TS + Webpack 模板（含 Rsbuild 版本）', url: 'https://github.com/mobei12/React-ts-webpack' },
   { name: 'proxychains-rs', desc: 'Rust 实现的 proxychains', url: 'https://github.com/mobei12/proxychains-rs' },
@@ -19,9 +19,10 @@ export default function Home() {
           <img src={withBase('/mobei12.png')} alt="MoBei" className="bx-avatar" />
           <p className="bx-kicker">Hi, I'm</p>
           <h1 className="bx-name"><ScrambleText text="MOBEI · 漠北" /></h1>
-          <p className="bx-lead">全栈开发工程师 · 现于 <b>Zenflux</b> 做 AI Agent 平台（ZenfluxAIOS）。记录，分享。</p>
+          <p className="bx-lead">全栈开发工程师 · 前端架构 · 现于 <b>Zenflux</b> 负责 AI Agent 平台（ZenfluxAIOS）的前端架构。记录，分享。</p>
           <div className="bx-actions">
             <a className="bx-btn bx-btn-pri" href={withBase('/article/')}>查看文章</a>
+            <a className="bx-btn" href={withBase('/work/')}>工作项目</a>
             <a className="bx-btn" href={withBase('/cv/')}>关于我</a>
           </div>
         </TiltCard>
@@ -30,11 +31,12 @@ export default function Home() {
           <p className="bx-label">● 当前工作</p>
           <h3>Zenflux · ZenfluxAIOS</h3>
           <ul>
-            <li>Ontology 低代码 Interface 配置平台</li>
-            <li>Widget 协议、注册与发布流水线、开发者中心</li>
-            <li>Agent 驱动 UI：A2UI、iframe 嵌入</li>
-            <li>Go 后端 · Python Agent Runtime · Tauri 桌面 AI CLI</li>
+            <li>A2UI 生成式 UI 协议与运行时</li>
+            <li>Agent 流式卡片协议 · 意图契约 · 嵌入桥</li>
+            <li>Widget 开放生态：Manifest · Studio · 发布与版本</li>
+            <li>Design Token 合同 · 多端 Monorepo · AI 编码治理</li>
           </ul>
+          <a className="bx-more" href={withBase('/work/')}>查看工作项目 →</a>
         </TiltCard>
 
         <TiltCard className="bx-stat">

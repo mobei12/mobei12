@@ -1,0 +1,6 @@
+[
+  { "type": "file", "name": "index", "label": "概览" },
+  { "type": "file", "name": "streaming-card-protocol", "label": "为 Agent 对话设计流式卡片协议（草稿）" },
+  { "type": "file", "name": "design-token-contract", "label": "Design Token 合同与契约测试（草稿）" },
+  { "type": "file", "name": "ai-coding-governance", "label": "在 Monorepo 里治理 AI 编码（草稿）" }
+]

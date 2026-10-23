@@ -1,5 +1,10 @@
 [
   {
+    "text": "工作项目",
+    "link": "/work/",
+    "activeMatch": "/work/"
+  },
+  {
     "text": "文章",
     "link": "/article/",
     "activeMatch": "/article/"
